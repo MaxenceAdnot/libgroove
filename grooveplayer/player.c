@@ -115,7 +115,7 @@ static void emit_event(struct GrooveQueue *queue, enum GroovePlayerEventType typ
 
 static uint64_t now_nanos(void) {
     struct timespec tms;
-    clock_gettime(CLOCK_MONOTONIC, &tms);
+    g_clock_gettime(CLOCK_MONOTONIC, &tms);
     uint64_t tv_sec = tms.tv_sec;
     uint64_t sec_mult = 1000000000;
     uint64_t tv_nsec = tms.tv_nsec;
@@ -221,7 +221,7 @@ static void *dummy_thread(void *arg) {
 
         // sleep for a little while
         struct timespec tms;
-        clock_gettime(CLOCK_MONOTONIC, &tms);
+        g_clock_gettime(CLOCK_MONOTONIC, &tms);
         tms.tv_nsec += 10000000;
         pthread_cond_timedwait(&p->pause_cond, &p->play_head_mutex, &tms);
         pthread_mutex_unlock(&p->play_head_mutex);
@@ -439,7 +439,7 @@ struct GroovePlayer *groove_player_create(void) {
     p->play_head_mutex_inited = true;
 
     pthread_condattr_init(&p->cond_attr);
-    pthread_condattr_setclock(&p->cond_attr, CLOCK_MONOTONIC);
+    g_pthread_condattr_setclock(&p->cond_attr, CLOCK_MONOTONIC);
     if (pthread_cond_init(&p->pause_cond, &p->cond_attr) != 0) {
         groove_player_destroy(player);
         av_log(NULL, AV_LOG_ERROR, "unable to create mutex condition\n");

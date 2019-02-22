@@ -616,7 +616,7 @@ int groove_encoder_attach(struct GrooveEncoder *encoder, struct GroovePlaylist *
 
     e->sink->audio_format = encoder->actual_audio_format;
     e->sink->buffer_size = encoder->sink_buffer_size;
-    e->sink->buffer_sample_count = (codec->capabilities & CODEC_CAP_VARIABLE_FRAME_SIZE) ?
+    e->sink->buffer_sample_count = (codec->capabilities & AV_CODEC_CAP_VARIABLE_FRAME_SIZE) ?
         0 : e->stream->codec->frame_size;
     e->sink->gain = encoder->gain;
 

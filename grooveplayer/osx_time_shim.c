@@ -9,7 +9,7 @@
 #include "osx_time_shim.h"
 #include <mach/mach_time.h>
 
-int clock_gettime(clockid_t clk_id, struct timespec *tp) {
+int g_clock_gettime(g_clockid_t clk_id, struct timespec *tp) {
     clock_serv_t cclock;
     mach_timespec_t mts;
 
@@ -23,6 +23,6 @@ int clock_gettime(clockid_t clk_id, struct timespec *tp) {
     return retval;
 }
 
-int pthread_condattr_setclock(pthread_condattr_t *attr, int foo) {
+int g_pthread_condattr_setclock(pthread_condattr_t *attr, int foo) {
   return 0;
 }

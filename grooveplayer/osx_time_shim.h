@@ -18,13 +18,13 @@
 
 #define CLOCK_MONOTONIC SYSTEM_CLOCK
 
-typedef int clockid_t;
+typedef int g_clockid_t;
 
 /* the mach kernel uses struct mach_timespec, so struct timespec
     is loaded from <sys/_types/_timespec.h> for compatability */
 
-int clock_gettime(clockid_t clk_id, struct timespec *tp);
-int pthread_condattr_setclock(pthread_condattr_t *attr, int foo);
+int g_clock_gettime(g_clockid_t clk_id, struct timespec *tp);
+int g_pthread_condattr_setclock(pthread_condattr_t *attr, int foo);
 
 #endif
 #endif
